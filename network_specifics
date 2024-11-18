@@ -1,0 +1,17 @@
+
+Ansible for network devices
+
+
+1. cannot use plain SSH, generally "ansible_connection=network_cli" is in use
+2. recommended use of vault (at least), but most interesting is use of SSH keys for authentication (required additional configuration on network device side)
+    "ansible-vault create <name>"
+    ansible_user: user
+    ansible_password: password
+3. have to specify "ansible_network_os" in inventory
+4. in playbook, provider is not required (and not possible for network device) as inventory is specified in the body of ansible-playbook command
+5. have to specify vault name in playbook
+6. before 1st launch, have to add SSH-key to known hosts on the Ansible server, easiest way:
+    # ssh-keyscan <IP-addresses through spacebar> >> ~/.ssh/known_hosts
+
+
+for steps 1 and 3 it's possible to use group_variables
